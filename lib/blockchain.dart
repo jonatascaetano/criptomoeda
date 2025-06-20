@@ -1,12 +1,13 @@
 import 'block.dart';
-import 'dart:convert';
 
 class Blockchain {
   List<Block> chain;
   int difficulty;
   List<Map<String, dynamic>> pendingTransactions;
 
-  Blockchain({this.difficulty = 4}) : chain = [], pendingTransactions = [] {
+  Blockchain({this.difficulty = 4})
+      : chain = [],
+        pendingTransactions = [] {
     // Cria o bloco genesis
     createGenesisBlock();
   }

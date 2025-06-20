@@ -1,6 +1,5 @@
 import 'dart:convert';
-import 'dart:math';
-import 'dart:typed_data';
+import 'package:crypto/crypto.dart';
 
 class Block {
   final int index;
@@ -18,23 +17,12 @@ class Block {
     this.nonce = 0,
   }) : hash = '';
 
-  // Calcula o hash do bloco (implementação simplificada)
+  // Calcula o hash do bloco usando SHA-256 real
   String calculateHash() {
     final content = '$index$timestamp$data$previousHash$nonce';
     final bytes = utf8.encode(content);
-    return _simpleHash(bytes);
-  }
-
-  // Hash simples para demonstração
-  String _simpleHash(List<int> bytes) {
-    int hash = 0;
-    for (int byte in bytes) {
-      hash = ((hash << 5) - hash + byte) & 0xFFFFFFFF;
-    }
-    // Gera um hash de 64 caracteres para simular SHA-256
-    String hashStr = hash.toRadixString(16).padLeft(8, '0');
-    // Repete o hash para ter 64 caracteres
-    return (hashStr * 8).substring(0, 64);
+    final digest = sha256.convert(bytes);
+    return digest.toString();
   }
 
   // Minera o bloco (encontra um hash que começa com zeros)
