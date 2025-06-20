@@ -1,0 +1,12 @@
+name: blockchain_simples
+description: Um blockchain simples implementado em Dart
+version: 1.0.0
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  # Dependências básicas do Dart são suficientes
+
+dev_dependencies:
+  test: ^1.24.0 
