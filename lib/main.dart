@@ -19,7 +19,7 @@ void main() {
 
   // Adiciona um novo bloco (minera automaticamente)
   print('⛏️  Minerando novo bloco...');
-  blockchain.addBlock('Dados do primeiro bloco');
+  blockchain.addBlock();
   print('');
 
   // Adiciona mais transações
@@ -30,7 +30,7 @@ void main() {
 
   // Adiciona outro bloco
   print('⛏️  Minerando segundo bloco...');
-  blockchain.addBlock('Dados do segundo bloco');
+  blockchain.addBlock();
   print('');
 
   // Exibe informações da blockchain

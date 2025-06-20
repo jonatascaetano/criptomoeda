@@ -44,12 +44,24 @@ class Blockchain {
   }
 
   // Adiciona um novo bloco à cadeia
-  void addBlock(String data) {
+  void addBlock() {
     final previousBlock = getLatestBlock();
+
+    // Cria dados do bloco com as transações pendentes
+    String blockData;
+    if (pendingTransactions.isEmpty) {
+      blockData = 'Bloco sem transações';
+    } else {
+      final transactionsJson = pendingTransactions
+          .map((tx) => '${tx['from']} → ${tx['to']}: ${tx['amount']}')
+          .join(', ');
+      blockData = 'Transações: [$transactionsJson]';
+    }
+
     final newBlock = Block(
       index: previousBlock.index + 1,
       timestamp: DateTime.now().toIso8601String(),
-      data: data,
+      data: blockData,
       previousHash: previousBlock.hash,
     );
 
@@ -120,7 +132,7 @@ class Blockchain {
       print('Bloco #$i:');
       print('  Hash: ${block.hash}');
       print('  Hash Anterior: ${block.previousHash}');
-      print('  Dados: ${block.data}');
+      print('  Dados: "${block.data}"');
       print('  Timestamp: ${block.timestamp}');
       print('  Nonce: ${block.nonce}');
       print('');
